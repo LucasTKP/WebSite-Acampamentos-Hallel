@@ -92,7 +92,7 @@ function TableUsers({ idMeeting }: TebleUsersProps) {
               onClick={() => handlePresences()}
               className="flex items-center justify-center"
             >
-              <p>Prenseças</p>
+              <p>Presenças</p>
               <TriangleDownIcon
                 className={`${
                   filters.presences == "asc" ? "" : "rotate-180"
