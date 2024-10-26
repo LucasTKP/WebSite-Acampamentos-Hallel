@@ -11,7 +11,6 @@ import { MeetingModel } from "@/models/meeting";
 import {
   toFormattedDateDDMMYYYYToString,
   toFormattedDateToString,
-  toFormattedDateYYYYMMDDToString,
 } from "@/utils/functions/formmatter_date";
 import DialogEditMeeting from "../dialog_edit_meeting/dialog_edit_meeting";
 import Footer from "./footer";

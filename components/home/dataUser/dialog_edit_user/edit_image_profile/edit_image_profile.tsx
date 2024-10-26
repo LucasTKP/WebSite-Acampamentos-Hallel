@@ -35,7 +35,7 @@ function EditImageProfile({ closeDialog }: { closeDialog: () => void }) {
           accept="image/*"
           className="hidden"
         />
-        <div className="bg-[#62cc6f] rounded-full p-[7px]">
+        <div className="bg-background rounded-full p-[7px] border border-black">
           <CameraIcon className="w-[20px] h-[20px]" />
         </div>
       </label>
@@ -67,7 +67,7 @@ function EditImageProfile({ closeDialog }: { closeDialog: () => void }) {
                 )
               }
               disabled={isLoading}
-              className="z-50 ml-auto bg-[#62cc6f] px-[10px] py-[2px] mr-[5px] rounded-[4px] font-[500] text-[#212121]"
+              className="z-50 ml-auto bg-primary px-[10px] py-[2px] mr-[5px] rounded-[4px] font-[500] text-[#212121]"
             >
               {isLoading ? (
                 <div className="relative flex items-center justify-center w-[25px] h-[25px] rounded-full border-[6px] border-t-gray-400 border-background animate-spin" />

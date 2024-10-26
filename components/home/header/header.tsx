@@ -21,7 +21,7 @@ export default function Header() {
       )}
 
       <Image
-        src="/images/logo_canaã.png"
+        src={process.env.NEXT_PUBLIC_PATH_LOGO!}
         alt="Logo"
         width={80}
         height={80}

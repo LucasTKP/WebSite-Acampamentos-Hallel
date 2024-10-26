@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import React from "react";
 import { UserModel } from "@/models/user";
-import { createTableExcel } from "./table_users_controller";
+import { downloadTableExcel } from "./table_users_controller";
 
 interface HeaderProps {
   users: UserModel[];
@@ -39,7 +39,7 @@ function Header({ users, setTextSearch, setPagination }: HeaderProps) {
         <MagnifyingGlassIcon width={20} height={20} />
       </label>
       <button
-        onClick={() => createTableExcel(users)}
+        onClick={() => downloadTableExcel(users)}
         className="bg-primary text-background px-[20px] max-xsm:px-[10px] py-[3px] max-xsm:py-[1px] font-[500] max-xsm:text-[13px] rounded-[5px] hover:brightness-95 duration-200"
       >
         Exportar
