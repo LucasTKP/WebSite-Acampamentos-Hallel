@@ -43,7 +43,7 @@ function DataUser() {
 
           {user?.madeCaneYear && (
             <p>
-              <span className="font-[500]">Fez o Canaã:</span>{" "}
+              <span className="font-[500]">Fez o {process.env.NEXT_PUBLIC_NAME_CAMPING}:</span>{" "}
               {user?.madeCaneYear}
             </p>
           )}

@@ -32,7 +32,7 @@ function DialogEditUser({
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused ? "#479924" : "white",
+      backgroundColor: state.isFocused ? process.env.NEXT_PUBLIC_COLOR_PRIMARY  : "white",
       color: "black",
     }),
   };

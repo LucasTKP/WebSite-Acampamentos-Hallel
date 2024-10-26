@@ -21,8 +21,8 @@ const poiretOne = Poiret_One({
 });
 
 export const metadata: Metadata = {
-  title: "Canaã",
-  description: "Grupo de Jovens - Canaã",
+  title: process.env.NEXT_PUBLIC_NAME_CAMPING,
+  description: `Grupo de Jovens - ${process.env.NEXT_PUBLIC_NAME_CAMPING}`,
 };
 
 export default function RootLayout({

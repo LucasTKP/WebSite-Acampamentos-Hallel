@@ -14,7 +14,7 @@ const customStyles: StylesConfig = {
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isFocused ? "#479924" : "white",
+    backgroundColor: state.isFocused ? process.env.NEXT_PUBLIC_COLOR_PRIMARY : "white",
     color: "black",
   }),
 };
@@ -112,7 +112,7 @@ export default function Form_signup() {
           </div>
         </label>
         <label className="flex flex-col">
-          <p className="text-[18px]">Você já fez o acampamento Canaã?</p>
+          <p className="text-[18px]">Você já fez o acampamento {process.env.NEXT_PUBLIC_NAME_CAMPING}?</p>
           <Select
             options={[
               { value: true, label: "Sim" },
