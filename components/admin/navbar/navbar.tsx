@@ -40,7 +40,7 @@ function Navbar() {
         }`}
       >
         <Image
-          alt="logo Canaã"
+          alt="logo"
           src={process.env.NEXT_PUBLIC_PATH_LOGO!}
           width={80}
           height={80}
