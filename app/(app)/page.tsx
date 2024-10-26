@@ -6,7 +6,7 @@ export default function Page() {
     <main className="min-h-screen flex flex-col">
       <Auth />
       <footer className="h-[60px] w-full mt-auto bottom-0 bg-secondary/30 flex justify-center items-center">
-        {`Direitos reservados - Canaã ${new Date().getFullYear()}`}
+        {`Direitos reservados - ${process.env.NEXT_PUBLIC_NAME_CAMPING} ${ new Date().getFullYear()}`}
       </footer>
     </main>
   );

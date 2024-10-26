@@ -14,7 +14,6 @@ export default function RootLayout({
   useEffect(() => {
     if (user?.isAdmin === false) router.push("/home");
   }, [router, user]);
-
   return (
     <div className="flex">
       {user?.isAdmin && (

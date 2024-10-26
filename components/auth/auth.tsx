@@ -16,7 +16,7 @@ export default function Auth() {
   return (
     <div className="flex flex-col items-center pb-[30px] flex-auto">
       <Image
-        src={"/images/logo_canaã.png"}
+        src={process.env.NEXT_PUBLIC_PATH_LOGO!}
         alt="Logo"
         width={200}
         height={200}

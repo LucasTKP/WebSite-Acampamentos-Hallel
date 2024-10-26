@@ -35,6 +35,21 @@ export async function uploadImageProfile({
   return url;
 }
 
+interface UploadExcelPresences {
+  blobImage: Blob;
+  path: string;
+}
+
+export async function uploadExcelPresences({
+  blobImage: blobExcel,
+  path,
+}: UploadExcelPresences): Promise<string> {
+  const storageRef = ref(storage, path);
+  await uploadBytes(storageRef, blobExcel);
+  const url = await getDownloadURL(ref(storage, path));
+  return url;
+}
+
 
 export async function deleteFile(pathDeleteImage: string) {
   const desertRef = ref(storage, pathDeleteImage);

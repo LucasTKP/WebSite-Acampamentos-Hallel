@@ -1,6 +1,10 @@
 import { UserModel } from "@/models/user";
-import { getAllUsers, getAllUsersByMeeting } from "@/repositories/userFireStore";
+import {
+  getAllUsers,
+  getAllUsersByMeeting,
+} from "@/repositories/userFireStore";
 import { formatterError } from "@/utils/functions/formatter_error";
+import { toFormattedDateDDMMYYYYToString } from "@/utils/functions/formmatter_date";
 import * as XLSX from "xlsx";
 
 interface onGetUsersProps {
@@ -68,32 +72,41 @@ export function sortPresencesUsers({
   }
 }
 
-export async function createTableExcel(data: UserModel[]) {
-  const filteredData = data.map(({ name, totalPresence, madeCane, madeCaneYear, lastPresence }) => ({
-    "Nome": name,
-    "Total de presenças": totalPresence,
-    "Fez o Acampamento?": madeCane ? "Sim" : "Não",
-    "Fez o Acampamento em": madeCaneYear,
-    "Última presenca": lastPresence
-  }));
+export async function downloadTableExcel(users: UserModel[]) {
+  const dataBlob = await createTableExcel(users);
+  const url = URL.createObjectURL(dataBlob);
+  const a = document.createElement("a");
+  const date = toFormattedDateDDMMYYYYToString(new Date());
+  a.href = url;
+  a.download = `Presenças ${date}.xlsx`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+}
+
+export async function createTableExcel(data: UserModel[]): Promise<Blob> {
+  const filteredData = data.map(
+    ({ id, name, totalPresence, madeCane, madeCaneYear, lastPresence }) => ({
+      "Id": id,
+      "Nome": name,
+      "Total de presenças": totalPresence,
+      "Fez o Acampamento?": madeCane ? "Sim" : "Não",
+      "Fez o Acampamento em": madeCaneYear,
+      "Última presenca": lastPresence,
+    })
+  );
 
   const worksheet = XLSX.utils.json_to_sheet(filteredData);
   const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Canaã");
+  XLSX.utils.book_append_sheet(workbook, worksheet, process.env.NEXT_PUBLIC_NAME_CAMPING ?? "Acampamento");
 
   const excelBuffer = XLSX.write(workbook, {
     bookType: "xlsx",
     type: "array",
   });
 
-  const dataBlob = new Blob([excelBuffer], {
+  return new Blob([excelBuffer], {
     type: "application/octet-stream",
   });
-  const url = URL.createObjectURL(dataBlob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "canaã.xlsx";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
 }

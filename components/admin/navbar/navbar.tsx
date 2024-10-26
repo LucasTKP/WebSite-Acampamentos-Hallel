@@ -41,7 +41,7 @@ function Navbar() {
       >
         <Image
           alt="logo Canaã"
-          src="/images/logo_canaã.png"
+          src={process.env.NEXT_PUBLIC_PATH_LOGO!}
           width={80}
           height={80}
           className={`object-cover mt-[20px] max-md:mt-[40px]`}
