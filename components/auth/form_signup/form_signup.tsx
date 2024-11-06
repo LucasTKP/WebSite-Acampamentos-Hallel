@@ -15,7 +15,7 @@ const customStyles: StylesConfig = {
   option: (provided, state) => ({
     ...provided,
     backgroundColor: state.isFocused ? process.env.NEXT_PUBLIC_COLOR_PRIMARY : "white",
-    color: "black",
+    color: state.isFocused ? "white" : "black",
   }),
 };
 

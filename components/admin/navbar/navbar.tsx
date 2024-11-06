@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { PersonIcon, ReaderIcon } from "@radix-ui/react-icons";
+import { HomeIcon, PersonIcon, ReaderIcon } from "@radix-ui/react-icons";
 import { usePathname } from "next/navigation";
 
 function Navbar() {
@@ -47,6 +47,13 @@ function Navbar() {
           className={`object-cover mt-[20px] max-md:mt-[40px]`}
           priority
         />
+        <Link
+          href={"/home"}
+          className="w-full flex justify-center h-[35px] relative mt-[30px]"
+          onClick={() => setMenuIsOpen(false)}
+        >
+          <HomeIcon width={35} height={35} className={"h-full text-gray-600"} />
+        </Link>
         <Link
           href={"/admin"}
           className="w-full flex justify-center h-[35px] relative mt-[30px]"
