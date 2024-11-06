@@ -14,18 +14,20 @@ export default function Auth() {
   );
 
   return (
-    <div className="flex flex-col items-center pb-[30px] flex-auto">
+    <div className="flex flex-col items-center pb-[30px] sm:flex-auto">
       <Image
         src={process.env.NEXT_PUBLIC_PATH_LOGO!}
         alt="Logo"
         width={200}
         height={200}
         priority
+        className="max-sm:w-[150px] max-xsm:w-[150px]"
+
       />
 
-      <div className="flex-auto flex justify-center items-center">
+      <div className="flex-auto flex justify-center items-center max-sm:mt-[20px]">
         <div
-          style={{ filter: "drop-shadow(0 1px 5px rgba(0, 0, 0, 0.2))" }}
+          style={{ filter: "drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5))" }}
           className="w-[450px] max-sm:w-[400px] max-xsm:w-[350px] bg-background rounded-[10px]"
         >
           <div className="flex justify-between">
@@ -34,7 +36,7 @@ export default function Auth() {
                 optionAuth == enumOptionAuth.SignIn
                   ? "bg-primary text-background"
                   : "bg-background text-black/60"
-              }    hover:brightness-95 rounded-tl-[10px] duration-200`}
+              }    rounded-tl-[10px] duration-200`}
               onClick={() => setOptionAuth(enumOptionAuth.SignIn)}
             >
               <p className="font-[500] text-[18px] max-sm:text-[16px]">
@@ -49,7 +51,7 @@ export default function Auth() {
                 optionAuth == enumOptionAuth.SignUp
                   ? "bg-primary text-background"
                   : "bg-background text-black/60"
-              }  hover:brightness-95 rounded-tr-[10px] duration-200`}
+              }  rounded-tr-[10px] duration-200`}
               onClick={() => setOptionAuth(enumOptionAuth.SignUp)}
             >
               <p className="font-[500] text-[18px]">Cadastrar</p>
