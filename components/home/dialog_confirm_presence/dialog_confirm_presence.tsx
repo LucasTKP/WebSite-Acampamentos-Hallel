@@ -20,12 +20,12 @@ function DialogConfirmPresence({
   const { user, setUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
-  
+
   useEffect(() => {
     if (!meeting.isOpen || !meeting.isVisible) {
       closeDialog();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function closeDialog() {
@@ -40,8 +40,8 @@ function DialogConfirmPresence({
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/50 data-[state=open]:animate-overlayShow fixed inset-0 z-10" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-10">
-          <Dialog.Title className="text-[20px] font-medium">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-10 overflow-auto">
+          <Dialog.Title className="text-[20px] font-medium overflow-auto">
             Confirmar Presença
           </Dialog.Title>
           <Dialog.Description className="mt-[10px] mb-5 text-[15px]">
@@ -79,7 +79,7 @@ function DialogConfirmPresence({
             <label className="w-full" htmlFor="password">
               <p className="text-[15px] font-[500]">Password:</p>
               <input
-                className="w-full p-[8px] rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] placeholder:text-black/60"
+                className="w-full p-[8px] rounded-[4px] px-[10px] text-[16px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] placeholder:text-black/60"
                 name="password"
                 placeholder="Digite a senha da reunião"
                 required

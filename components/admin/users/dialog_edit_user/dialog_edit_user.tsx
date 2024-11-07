@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { onEditUser } from "./dialog_edit_user_controller";
@@ -32,7 +32,9 @@ function DialogEditUser({
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused ? process.env.NEXT_PUBLIC_COLOR_PRIMARY  : "white",
+      backgroundColor: state.isFocused
+        ? process.env.NEXT_PUBLIC_COLOR_PRIMARY
+        : "white",
       color: "black",
     }),
   };
@@ -73,11 +75,11 @@ function DialogEditUser({
           className="bg-black/50 data-[state=open]:animate-overlayShow fixed inset-0 z-10"
           onClick={() => setUserSelect(null)}
         />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%]  w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-10 flex flex-col">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%]  w-[90vw] max-w-[450px] max-h-[70svh] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-background p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-10 flex flex-col overflow-auto">
           <Dialog.Title className="text-[20px] font-medium">
             Edite este usuário
           </Dialog.Title>
-          <Dialog.Description className="mt-[10px] mb-5 text-[15px]">
+          <Dialog.Description className="mt-[10px] mb-5 text-[16px]">
             Modifique as informações do usuário nos campos abaixo
           </Dialog.Description>
           <div className="w-[120px] aspect-square rounded-full self-center border-[1px] border-black relative">
@@ -88,7 +90,11 @@ function DialogEditUser({
               height={1000}
               className="rounded-full min-w-full aspect-square"
             />
-            <EditImageProfile user={userSelect} setUsers={setUsers} setUserSelect={setUserSelect} />
+            <EditImageProfile
+              user={userSelect}
+              setUsers={setUsers}
+              setUserSelect={setUserSelect}
+            />
           </div>
 
           <form
@@ -106,7 +112,7 @@ function DialogEditUser({
             <label className="w-full" htmlFor="name">
               <p className="text-[15px] font-[500]">Nome:</p>
               <input
-                className="w-full p-[8px] rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] placeholder:text-black/60"
+                className="w-full p-[8px] rounded-[4px] px-[10px] text-[16px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] placeholder:text-black/60"
                 name="name"
                 placeholder="Escreva o nome do usuário"
                 type="text"
@@ -117,7 +123,7 @@ function DialogEditUser({
 
             <div className="w-full">
               <p className="text-[15px] font-[500]">Email:</p>
-              <div className="w-full p-[10px] rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]">
+              <div className="w-full p-[10px] rounded-[4px] px-[10px] text-[16px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]">
                 <p>{userSelect.email}</p>
               </div>
             </div>
@@ -126,7 +132,7 @@ function DialogEditUser({
               <label htmlFor="totalPresence" className="w-[48%] max-xsm:w-full">
                 <p className="text-[15px] font-[500]">Total de Presença:</p>
                 <input
-                  className="w-full p-[8px] rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+                  className="w-full p-[8px] rounded-[4px] px-[10px] text-[16px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
                   name="totalPresence"
                   type="number"
                   required
@@ -136,7 +142,7 @@ function DialogEditUser({
               <label htmlFor="lastPresence" className="w-[48%] max-xsm:w-full">
                 <p className="text-[15px] font-[500]">Última presença:</p>
                 <input
-                  className="w-full p-[8px] rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
+                  className="w-full p-[8px] rounded-[4px] px-[10px] text-[16px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
                   name="lastPresence"
                   type="date"
                   required
