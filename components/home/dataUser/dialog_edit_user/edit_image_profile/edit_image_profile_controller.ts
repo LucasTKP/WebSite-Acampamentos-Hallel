@@ -81,8 +81,8 @@ export async function handleFileChange({
 }: handleFileChange) {
   if (event.target.files?.length) {
     let file = event.target.files[0];
-    if (file.size > 30000000) {
-      toast.error("A imagem que você selecionou é muito grande");
+    if (file.size > 10000000) {
+      toast.error("A imagem deve ter no máximo 10mb");
       return;
     }
 
