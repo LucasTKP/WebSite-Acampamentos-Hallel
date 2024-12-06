@@ -45,7 +45,7 @@ function DialogConfirmPresence({
             Confirmar Presença
           </Dialog.Title>
           <Dialog.Description className="mt-[10px] mb-5 text-[15px]">
-            Confirme sua prenseça nesta reunião
+            Confirme sua presença nesta reunião
           </Dialog.Description>
           <form
             onSubmit={(e) =>
