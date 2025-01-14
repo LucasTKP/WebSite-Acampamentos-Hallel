@@ -28,7 +28,7 @@ function EditImageProfile({
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
-    <div>
+    <div className="w-full height-full">
       <label className="absolute bottom-0 right-0">
         <input
           ref={inputFileRef}
@@ -56,7 +56,7 @@ function EditImageProfile({
               setFile(null);
               clearFileInput(inputFileRef);
             }}
-            className="bg-black/80 w-full h-full left-0 top-0 fixed"
+            className="bg-black/80 w-full h-[105%] left-0 top-0 fixed"
           />
           <div className="flex flex-col w-full">
             <button
@@ -78,7 +78,7 @@ function EditImageProfile({
               disabled={isLoading}
               className="z-50 ml-auto bg-primary px-[10px] py-[2px] mr-[5px] rounded-[4px] font-[500] text-[#212121]"
             >
-              {isLoading ? (
+            {isLoading ? (
                 <div className="relative flex items-center justify-center w-[25px] h-[25px] rounded-full border-[6px] border-t-gray-400 border-background animate-spin" />
               ) : (
                 "Confirmar"
@@ -86,7 +86,7 @@ function EditImageProfile({
             </button>
             <Cropper
               src={URL.createObjectURL(file)}
-              className="aspect-square w-full mt-[10px] self-center mx-auto"
+              className="aspect-square w-full mt-[10px] self-center mx-auto h-[90%]"
               aspectRatio={1 / 1}
               ref={cropperRef}
             />

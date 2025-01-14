@@ -19,7 +19,7 @@ function EditImageProfile({ closeDialog }: { closeDialog: () => void }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
-    <div>
+    <div className="w-full height-full">
       <label className="absolute bottom-0 right-0">
         <input
           ref={inputFileRef}
@@ -47,7 +47,7 @@ function EditImageProfile({ closeDialog }: { closeDialog: () => void }) {
               setFile(null);
               clearFileInput(inputFileRef);
             }}
-            className="bg-black/80 w-full h-full left-0 top-0 fixed"
+            className="bg-black/80 w-full h-[105%] left-0 top-0 fixed"
           />
           <div className="flex flex-col w-full">
             <button
@@ -77,7 +77,7 @@ function EditImageProfile({ closeDialog }: { closeDialog: () => void }) {
             </button>
             <Cropper
               src={URL.createObjectURL(file)}
-              className="aspect-square w-full mt-[10px] self-center mx-auto"
+              className="aspect-square w-full mt-[10px] self-center mx-auto h-[90%]"
               aspectRatio={1 / 1}
               ref={cropperRef}
             />
