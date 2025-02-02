@@ -27,7 +27,9 @@ function DialogEditUser() {
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused ? process.env.NEXT_PUBLIC_COLOR_PRIMARY  : "white",
+      backgroundColor: state.isFocused
+        ? process.env.NEXT_PUBLIC_COLOR_PRIMARY
+        : "white",
       color: "black",
     }),
   };
@@ -36,26 +38,13 @@ function DialogEditUser() {
     { value: false, label: "Não" },
   ];
 
-  const options2 = [
-    { value: 2024, label: 2024 },
-    { value: 2023, label: 2023 },
-    { value: 2022, label: 2022 },
-    { value: 2021, label: 2021 },
-    { value: 2020, label: 2020 },
-    { value: 2019, label: 2019 },
-    { value: 2018, label: 2018 },
-    { value: 2017, label: 2017 },
-    { value: 2016, label: 2016 },
-    { value: 2015, label: 2015 },
-    { value: 2014, label: 2014 },
-    { value: 2013, label: 2013 },
-    { value: 2012, label: 2012 },
-    { value: 2011, label: 2011 },
-    { value: 2010, label: 2010 },
-    { value: 2009, label: 2009 },
-    { value: 2008, label: 2008 },
-    { value: 2007, label: 2007 },
-  ];
+  const yearsMadeCane = Array.from(
+    { length: new Date().getFullYear() - 2006 },
+    (_, i) => {
+      const date = new Date().getFullYear() - i;
+      return { value: date, label: date };
+    }
+  );
 
   const handleChange = (selectedOption: any) => {
     setMadeCane(selectedOption.value);
@@ -138,11 +127,11 @@ function DialogEditUser() {
                 <label className="flex flex-col w-[48%] max-xsm:w-full">
                   <p className="text-[18px] max-sm:text-[16px]">Em que ano?</p>
                   <Select
-                    options={options2}
+                    options={yearsMadeCane}
                     required={true}
                     name="madeCaneYear"
                     styles={customStyles}
-                    defaultValue={options2.find(
+                    defaultValue={yearsMadeCane.find(
                       (option) => option.value === user!.madeCaneYear
                     )}
                   />
@@ -171,7 +160,10 @@ function DialogEditUser() {
               </label>
             </div>
             <div className="mt-[25px] max-sm:mt-[20px] max-xsm:mt-[15px] flex w-full justify-end gap-x-[15px]">
-              <button onClick={() => closeDialog()} className="bg-red text-background hover:brightness-95 focus:shadow-green7 inline-flex py-[8px] items-center justify-center rounded-[4px] px-[15px] font-[500] leading-none focus:shadow-[0_0_0_2px] focus:outline-none ">
+              <button
+                onClick={() => closeDialog()}
+                className="bg-red text-background hover:brightness-95 focus:shadow-green7 inline-flex py-[8px] items-center justify-center rounded-[4px] px-[15px] font-[500] leading-none focus:shadow-[0_0_0_2px] focus:outline-none "
+              >
                 Cancelar
               </button>
               <button

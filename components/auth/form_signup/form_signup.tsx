@@ -4,7 +4,6 @@ import React from "react";
 import Select, { StylesConfig } from "react-select";
 import { onCreateUser } from "./form_signup_controller";
 
-
 const customStyles: StylesConfig = {
   control: (provided) => ({
     ...provided,
@@ -14,8 +13,10 @@ const customStyles: StylesConfig = {
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isFocused ? process.env.NEXT_PUBLIC_COLOR_PRIMARY : "white",
-    color: state.isFocused ? "white" : "black",
+    backgroundColor: state.isFocused
+      ? process.env.NEXT_PUBLIC_COLOR_PRIMARY
+      : "white",
+    color: "black",
   }),
 };
 
@@ -23,6 +24,14 @@ export default function Form_signup() {
   const [eye, setEye] = React.useState<enumEye>(enumEye.Close);
   const [madeCane, setMadeCane] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  const yearsMadeCane = Array.from(
+    { length: new Date().getFullYear() - 2006 },
+    (_, i) => {
+      const date = new Date().getFullYear() - i;
+      return { value: date, label: date };
+    }
+  );
 
   const handleChange = (selectedOption: any) => {
     setMadeCane(selectedOption.value);
@@ -112,7 +121,9 @@ export default function Form_signup() {
           </div>
         </label>
         <label className="flex flex-col">
-          <p className="text-[18px]">Você já fez o acampamento {process.env.NEXT_PUBLIC_NAME_CAMPING}?</p>
+          <p className="text-[18px]">
+            Você já fez o acampamento {process.env.NEXT_PUBLIC_NAME_CAMPING}?
+          </p>
           <Select
             options={[
               { value: true, label: "Sim" },
@@ -129,26 +140,7 @@ export default function Form_signup() {
           <label className="flex flex-col">
             <p className="text-[16px]">Em qual ano você fez o acampamento?</p>
             <Select
-              options={[
-                { value: 2024, label: 2024 },
-                { value: 2023, label: 2023 },
-                { value: 2022, label: 2022 },
-                { value: 2021, label: 2021 },
-                { value: 2020, label: 2020 },
-                { value: 2019, label: 2019 },
-                { value: 2018, label: 2018 },
-                { value: 2017, label: 2017 },
-                { value: 2016, label: 2016 },
-                { value: 2015, label: 2015 },
-                { value: 2014, label: 2014 },
-                { value: 2013, label: 2013 },
-                { value: 2012, label: 2012 },
-                { value: 2011, label: 2011 },
-                { value: 2010, label: 2010 },
-                { value: 2009, label: 2009 },
-                { value: 2008, label: 2008 },
-                { value: 2007, label: 2007 },
-              ]}
+              options={yearsMadeCane}
               required={true}
               name="madeCaneYear"
               styles={customStyles}
