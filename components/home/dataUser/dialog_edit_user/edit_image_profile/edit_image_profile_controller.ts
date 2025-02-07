@@ -1,5 +1,5 @@
 import { UserModel } from "@/models/user";
-import { getAllUsers, getUser, updateUser } from "@/repositories/userFireStore";
+import { getUsersTable, getUser, updateUser } from "@/repositories/userFireStore";
 import { deleteFile, uploadImageProfile } from "@/repositories/userStorage";
 import heic2any from "heic2any";
 import { ChangeEvent } from "react";

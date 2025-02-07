@@ -1,5 +1,5 @@
 import { UserModel } from "@/models/user";
-import { getAllUsers, updateUser } from "@/repositories/userFireStore";
+import { getUsersTable, updateUser } from "@/repositories/userFireStore";
 import { deleteFile, uploadImageProfile } from "@/repositories/userStorage";
 import heic2any from "heic2any";
 import { ChangeEvent } from "react";
@@ -10,6 +10,7 @@ interface SaveImageProfile {
   cropperRef: React.RefObject<ReactCropperElement>;
   file: File;
   user: UserModel;
+  maxUsersTable: number;
   setUsers: React.Dispatch<React.SetStateAction<UserModel[]>>;
   setUserSelect: React.Dispatch<React.SetStateAction<UserModel | null>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +20,7 @@ export async function SaveImageProfile({
   cropperRef,
   file,
   user,
+  maxUsersTable,
   setUsers,
   setUserSelect,
   setIsLoading,
@@ -42,7 +44,7 @@ export async function SaveImageProfile({
       const url = await uploadImageProfile({ blobImage, path });
       await onUpdateUser({ user, namePhoto, photoUrl: url });
 
-      setUsers(await getAllUsers());
+      setUsers(await getUsersTable(maxUsersTable));
 
       if (user.namePhoto !== "jesus.jpg") {
         const pathDeletePhoto = `imageProfile/${user.id}/${user.namePhoto}`;

@@ -4,6 +4,7 @@ import {
   collection,
   doc,
   getDocs,
+  limit,
   orderBy,
   query,
   setDoc,
@@ -19,7 +20,7 @@ export async function createMeeting(dataMeeting: Omit<MeetingModel, "id">) {
 }
 
 export async function getSomeMeetings(): Promise<Array<MeetingModel> | null> {
-  const q = query(collection(db, "meetings"), where("isVisible", "==", true), orderBy("date", "desc"));
+  const q = query(collection(db, "meetings"), where("isVisible", "==", true), orderBy("date", "desc"), limit(3));
 
   const querySnapshot = await getDocs(q);
   const meetings: Array<MeetingModel> = [];

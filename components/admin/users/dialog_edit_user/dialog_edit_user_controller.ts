@@ -8,6 +8,8 @@ import { updateUser } from "@/repositories/userFireStore";
 interface OnEditUser {
   e: FormEvent<HTMLFormElement>;
   user: UserModel;
+  maxUsersTable: number;
+
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setUsers: React.Dispatch<React.SetStateAction<UserModel[]>>;
   setUserSelect: React.Dispatch<React.SetStateAction<UserModel | null>>;
@@ -16,6 +18,7 @@ interface OnEditUser {
 export async function onEditUser({
   e,
   user,
+  maxUsersTable,
   setIsLoading,
   setUsers,
   setUserSelect,
@@ -27,7 +30,7 @@ export async function onEditUser({
     if (verifyDataUser(dataUser)) {
       await updateUser(dataUser);
       toast.success("Usuário editado com sucesso.");
-      await onGetUsers({ setUsers });
+      await onGetUsers({ setUsers, maxUsersTable });
       setUserSelect(null);
     }
   } catch (error) {

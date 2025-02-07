@@ -12,11 +12,13 @@ import EditImageProfile from "./edit_image_profile/edit_image_profile";
 interface DialogEditUserModelProps {
   setUsers: React.Dispatch<React.SetStateAction<UserModel[]>>;
   userSelect: UserModel;
+  maxUsersTable: number;
   setUserSelect: React.Dispatch<React.SetStateAction<UserModel | null>>;
 }
 
 function DialogEditUser({
   setUsers,
+  maxUsersTable,
   userSelect,
   setUserSelect,
 }: DialogEditUserModelProps) {
@@ -92,6 +94,7 @@ function DialogEditUser({
             />
             <EditImageProfile
               user={userSelect}
+              maxUsersTable={maxUsersTable}
               setUsers={setUsers}
               setUserSelect={setUserSelect}
             />
@@ -102,6 +105,7 @@ function DialogEditUser({
               onEditUser({
                 e,
                 user: userSelect,
+                maxUsersTable,
                 setIsLoading,
                 setUserSelect,
                 setUsers,

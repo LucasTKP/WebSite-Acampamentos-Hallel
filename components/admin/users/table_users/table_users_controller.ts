@@ -1,7 +1,8 @@
 import { UserModel } from "@/models/user";
 import {
-  getAllUsers,
+  getUsersTable,
   getAllUsersByMeeting,
+  getAllUsers,
 } from "@/repositories/userFireStore";
 import { formatterError } from "@/utils/functions/formatter_error";
 import { toFormattedDateDDMMYYYYToString } from "@/utils/functions/formmatter_date";
@@ -10,17 +11,21 @@ import * as XLSX from "xlsx";
 interface onGetUsersProps {
   setUsers: React.Dispatch<React.SetStateAction<UserModel[]>>;
   idMeeting?: string;
+  maxUsersTable: number;
 }
-export async function onGetUsers({ setUsers, idMeeting }: onGetUsersProps) {
+export async function onGetUsers({
+  setUsers,
+  idMeeting,
+  maxUsersTable,
+}: onGetUsersProps) {
   let users: UserModel[] = [];
   try {
     if (idMeeting) {
       users = await getAllUsersByMeeting(idMeeting);
     } else {
-      users = await getAllUsers();
+      users = await getUsersTable(maxUsersTable);
     }
-
-    setUsers(sortPresencesUsers({ users, action: "desc" }));
+    setUsers(users);
   } catch (error) {
     console.log(error);
     formatterError(error);
@@ -72,7 +77,8 @@ export function sortPresencesUsers({
   }
 }
 
-export async function downloadTableExcel(users: UserModel[]) {
+export async function downloadTableExcel() {
+  const users = await getAllUsers();
   const dataBlob = await createTableExcel(users);
   const url = URL.createObjectURL(dataBlob);
   const a = document.createElement("a");
@@ -82,14 +88,13 @@ export async function downloadTableExcel(users: UserModel[]) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-
 }
 
 export async function createTableExcel(data: UserModel[]): Promise<Blob> {
   const filteredData = data.map(
     ({ id, name, totalPresence, madeCane, madeCaneYear, lastPresence }) => ({
-      "Id": id,
-      "Nome": name,
+      Id: id,
+      Nome: name,
       "Total de presenças": totalPresence,
       "Fez o Acampamento?": madeCane ? "Sim" : "Não",
       "Fez o Acampamento em": madeCaneYear,
@@ -99,7 +104,11 @@ export async function createTableExcel(data: UserModel[]): Promise<Blob> {
 
   const worksheet = XLSX.utils.json_to_sheet(filteredData);
   const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, process.env.NEXT_PUBLIC_NAME_CAMPING ?? "Acampamento");
+  XLSX.utils.book_append_sheet(
+    workbook,
+    worksheet,
+    process.env.NEXT_PUBLIC_NAME_CAMPING ?? "Acampamento"
+  );
 
   const excelBuffer = XLSX.write(workbook, {
     bookType: "xlsx",

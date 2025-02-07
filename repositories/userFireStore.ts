@@ -1,3 +1,4 @@
+import { start } from "repl";
 import { db } from "@/lib/firebase_config";
 import { IDataAuthUser, UserModel } from "@/models/user";
 import {
@@ -7,6 +8,10 @@ import {
   updateDoc,
   collection,
   getDocs,
+  orderBy,
+  endAt,
+  limit,
+  startAfter,
 } from "firebase/firestore";
 import { getPresencesByMeeting } from "./presenceFireStore";
 import { createTableExcel } from "@/components/admin/users/table_users/table_users_controller";
@@ -47,6 +52,19 @@ export async function getUser(idUser: string): Promise<UserModel | null> {
   return null;
 }
 
+import { query } from "firebase/firestore";
+
+export async function getUsersTable(start: number): Promise<Array<UserModel>> {
+  console.log(start + 8);
+  const q = query(collection(db, "users"), orderBy("name"), limit(start + 8));
+  const querySnapshot = await getDocs(q);
+  const users: Array<UserModel> = [];
+  querySnapshot.forEach((doc) => {
+    users.push(UserModel.fromJSON(doc.data()));
+  });
+  return users;
+}
+
 export async function getAllUsers(): Promise<Array<UserModel>> {
   const querySnapshot = await getDocs(collection(db, "users"));
   const users: Array<UserModel> = [];
@@ -85,7 +103,7 @@ export async function resetPresences(users: UserModel[]) {
   const path = `backup/${toFormattedDateToString(new Date())}.xlsx`;
   await uploadExcelPresences({ blobImage: backup, path });
   for (const user of users) {
-      user.totalPresence = 0;
-      await updateUser(user);
+    user.totalPresence = 0;
+    await updateUser(user);
   }
 }

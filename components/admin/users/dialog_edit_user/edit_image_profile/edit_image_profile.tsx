@@ -13,12 +13,15 @@ import { toast } from "react-toastify";
 
 interface EditImageProfileProps {
   user: UserModel;
+  maxUsersTable: number;
+
   setUsers: React.Dispatch<React.SetStateAction<UserModel[]>>;
   setUserSelect: React.Dispatch<React.SetStateAction<UserModel | null>>;
 }
 
 function EditImageProfile({
   user,
+  maxUsersTable,
   setUsers,
   setUserSelect,
 }: EditImageProfileProps) {
@@ -66,6 +69,7 @@ function EditImageProfile({
                     cropperRef,
                     file,
                     user,
+                    maxUsersTable,
                     setUsers,
                     setUserSelect,
                     setIsLoading,
@@ -78,7 +82,7 @@ function EditImageProfile({
               disabled={isLoading}
               className="z-50 ml-auto bg-primary px-[10px] py-[2px] mr-[5px] rounded-[4px] font-[500] text-[#212121]"
             >
-            {isLoading ? (
+              {isLoading ? (
                 <div className="relative flex items-center justify-center w-[25px] h-[25px] rounded-full border-[6px] border-t-gray-400 border-background animate-spin" />
               ) : (
                 "Confirmar"
