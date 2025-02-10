@@ -98,7 +98,8 @@ export async function updateUser(data: UserModel) {
   });
 }
 
-export async function resetPresences(users: UserModel[]) {
+export async function resetPresences() {
+  const users = await getAllUsers();
   const backup = await createTableExcel(users);
   const path = `backup/${toFormattedDateToString(new Date())}.xlsx`;
   await uploadExcelPresences({ blobImage: backup, path });

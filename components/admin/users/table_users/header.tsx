@@ -1,7 +1,8 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import React from "react";
+import React, { useState } from "react";
 import { UserModel } from "@/models/user";
 import { downloadTableExcel } from "./table_users_controller";
+import DialogConfirmResetPrecences from "./dialog_confirm_reset_presences";
 
 interface HeaderProps {
   users: UserModel[];
@@ -9,9 +10,13 @@ interface HeaderProps {
 }
 
 function Header({ users, setTextSearch }: HeaderProps) {
+  const [countClick, setCountClick] = useState(0);
+
   return (
     <div className="flex p-[15px] max-xsm:p-[10px] items-center justify-between gap-x-[15px]">
-      <p className="text-[18px] max-sm:text-[16px] text-terciary/80 text-nowrap">
+      <p onClick={()=> {
+        setCountClick(countClick + 1);
+      }} className="text-[18px] max-sm:text-[16px] text-terciary/80 text-nowrap">
         <span className="font-[500] text-terciary">{users.length}</span>{" "}
         usuários
       </p>
@@ -32,6 +37,7 @@ function Header({ users, setTextSearch }: HeaderProps) {
       >
         Exportar
       </button>
+      <DialogConfirmResetPrecences countClick={countClick} setCountClick={setCountClick} />
     </div>
   );
 }

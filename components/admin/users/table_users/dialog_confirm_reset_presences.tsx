@@ -10,12 +10,11 @@ import { resetPresences } from "@/repositories/userFireStore";
 import { toast } from "react-toastify";
 
 interface DialogEditUserModelProps {
-  users: UserModel[];
   countClick: number
   setCountClick: React.Dispatch<React.SetStateAction<number>>
 }
 
-function DialogConfirmResetPrecences({ users, countClick, setCountClick }: DialogEditUserModelProps) {
+function DialogConfirmResetPrecences({ countClick, setCountClick }: DialogEditUserModelProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -45,7 +44,7 @@ function DialogConfirmResetPrecences({ users, countClick, setCountClick }: Dialo
                 className="bg-primary text-background hover:brightness-95 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
                 onClick={async () => {
                   setIsLoading(true);
-                  await resetPresences(users);
+                  await resetPresences();
                   toast.success("Presenças resetadas com sucesso");
                   setCountClick(0);
                 }}

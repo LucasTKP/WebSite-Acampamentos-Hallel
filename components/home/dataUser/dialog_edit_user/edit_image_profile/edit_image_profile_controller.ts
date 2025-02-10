@@ -1,5 +1,9 @@
 import { UserModel } from "@/models/user";
-import { getUsersTable, getUser, updateUser } from "@/repositories/userFireStore";
+import {
+  getUsersTable,
+  getUser,
+  updateUser,
+} from "@/repositories/userFireStore";
 import { deleteFile, uploadImageProfile } from "@/repositories/userStorage";
 import heic2any from "heic2any";
 import { ChangeEvent } from "react";
@@ -62,9 +66,16 @@ export async function SaveImageProfile({
 
 const getBlobFromCanvas = (cropper: Cropper): Promise<Blob | null> => {
   return new Promise((resolve) => {
-    cropper.getCroppedCanvas().toBlob((blob) => {
-      resolve(blob);
-    });
+    cropper
+      .getCroppedCanvas({
+        width: 500,
+        height: 500,
+        imageSmoothingEnabled: false,
+        imageSmoothingQuality: "low",
+      })
+      .toBlob((blob) => {
+        resolve(blob);
+      });
   });
 };
 
